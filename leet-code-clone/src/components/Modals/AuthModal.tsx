@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import ResetPassword from "./ResetPassword";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { authModalState } from "@/atoms/authModal";
+import { useCloseModal } from "@/hooks/useCloseModal";
 
 type AuthModalProps = {};
 
@@ -52,20 +53,3 @@ const AuthModal: React.FC<AuthModalProps> = () => {
 };
 export default AuthModal;
 
-function useCloseModal() {
-	const setAuthModal = useSetRecoilState(authModalState);
-
-	const closeModal = () => {
-		setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
-	};
-
-	useEffect(() => {
-		const handleEsc = (e: KeyboardEvent) => {
-			if (e.key === "Escape") closeModal();
-		};
-		window.addEventListener("keydown", handleEsc);
-		return () => window.removeEventListener("keydown", handleEsc);
-	}, []);
-
-	return closeModal;
-}
