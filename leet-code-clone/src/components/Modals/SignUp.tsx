@@ -1,8 +1,15 @@
+import { authModalState } from "@/atoms/authModal";
 import React from "react";
+import { useSetRecoilState } from 'recoil';
 
 type SignUpProps = {};
 
 const SignUp: React.FC<SignUpProps> = () => {
+	const setAuthModalState = useSetRecoilState(authModalState);
+
+	const handleClick = () => {
+		setAuthModalState((prev) => ({ ...prev, type: "login" }));
+	};
 	return (
 		<form className='space-y-6 px-6 py-4'>
 			<h3 className='text-xl font-medium text-white'>Register to LeetClone</h3>
@@ -65,6 +72,7 @@ const SignUp: React.FC<SignUpProps> = () => {
 			<div className='text-sm font-medium text-gray-300'>
 				Already have an account{"  "}
 				<a
+					onClick={() => handleClick()}
 					href='#'
 					className='text-blue-700 hover:underline'>
 					Log in

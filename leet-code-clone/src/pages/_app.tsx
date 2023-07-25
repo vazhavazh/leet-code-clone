@@ -1,15 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { RecoilRoot } from "recoil";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<>
+		<RecoilRoot>
 			<Head>
 				<title>Leet Code Clone</title>
 				<meta
 					name='description'
-					content='Web applications tat contains leetcode problems and video solutions'
+					content='Web applications tat contains 
+					leetcode problems and video solutions'
 				/>
 				<meta
 					name='viewport'
@@ -21,6 +23,6 @@ export default function App({ Component, pageProps }: AppProps) {
 				/>
 			</Head>
 			<Component {...pageProps} />
-		</>
+		</RecoilRoot>
 	);
 }
