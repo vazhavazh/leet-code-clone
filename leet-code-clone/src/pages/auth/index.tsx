@@ -1,3 +1,4 @@
+import AuthModal from "@/components/Modals/AuthModal";
 import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
 
@@ -16,6 +17,7 @@ const AuthPage: React.FC<indexProps> = () => {
 						alt='Hero-img'
 					/>
 				</div>
+				<AuthModal />
 			</div>
 		</div>
 	);
