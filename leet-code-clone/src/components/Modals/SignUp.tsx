@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type SignUpProps = {};
 
@@ -32,7 +33,11 @@ const SignUp: React.FC<SignUpProps> = () => {
 	const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (!inputs.email || !inputs.displayName || !inputs.password)
-			return alert("Please fill all fields");
+			return toast.error("Please fill all fields", {
+				position: "top-center",
+				autoClose: 1500,
+				theme: "dark",
+			});
 		try {
 			const newUser = await createUserWithEmailAndPassword(
 				inputs.email,
@@ -41,12 +46,21 @@ const SignUp: React.FC<SignUpProps> = () => {
 			if (!newUser) return;
 			router.push("/");
 		} catch (error: any) {
-			alert(error.message);
+			toast.error(error.message, {
+				position: "top-center",
+				autoClose: 3000,
+				theme: "dark",
+			});
 		}
 	};
 
 	useEffect(() => {
-		if (error) alert(error.message);
+		if (error)
+			toast.error(error.message, {
+				position: "top-center",
+				autoClose: 3000,
+				theme: "dark",
+			});
 	}, [error]);
 
 	return (
