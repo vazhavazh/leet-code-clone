@@ -1,4 +1,4 @@
-import { authModalState } from "@/atoms/authModal";
+import { authModalState } from "@/atoms/authModalAtom";
 import AuthModal from "@/components/Modals/AuthModal";
 import Navbar from "@/components/Navbar/Navbar";
 import { auth } from "@/firebase/firebase";

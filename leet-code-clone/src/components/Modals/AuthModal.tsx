@@ -4,7 +4,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import ResetPassword from "./ResetPassword";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { authModalState } from "@/atoms/authModal";
+import { authModalState } from "@/atoms/authModalAtom";
 import { useCloseModal } from "@/hooks/useCloseModal";
 
 type AuthModalProps = {};
@@ -52,4 +52,3 @@ const AuthModal: React.FC<AuthModalProps> = () => {
 	);
 };
 export default AuthModal;
-

@@ -1,4 +1,4 @@
-import { authModalState } from "@/atoms/authModal";
+import { authModalState } from "@/atoms/authModalAtom";
 import Link from "next/link";
 import React from "react";
 import { useSetRecoilState } from "recoil";

@@ -1,8 +1,8 @@
-import { authModalState } from "@/atoms/authModal";
+import { authModalState } from "@/atoms/authModalAtom";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 
-export const useCloseModal =() => {
+export const useCloseModal = () => {
 	const setAuthModal = useSetRecoilState(authModalState);
 
 	const closeModal = () => {
@@ -18,4 +18,4 @@ export const useCloseModal =() => {
 	}, []);
 
 	return closeModal;
-}
+};

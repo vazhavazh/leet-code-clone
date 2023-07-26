@@ -1,4 +1,4 @@
-import { authModalState } from "@/atoms/authModal";
+import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/firebase";
 import React, { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
