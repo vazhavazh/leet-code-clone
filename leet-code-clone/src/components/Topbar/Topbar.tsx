@@ -43,6 +43,7 @@ const Topbar: React.FC<TopbarProps> = () => {
 								setAuthModalState((prev) => ({
 									...prev,
 									isOpen: true,
+
 									type: "login",
 								}))
 							}>
