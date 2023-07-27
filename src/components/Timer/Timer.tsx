@@ -1,3 +1,4 @@
+import { formatTime } from "@/utils/formatTime";
 import React, { useState, useEffect } from "react";
 import { FiRefreshCcw } from "react-icons/fi";
 
@@ -6,16 +7,6 @@ type TimerProps = {};
 const Timer: React.FC<TimerProps> = () => {
 	const [showTimer, setShowTimer] = useState<boolean>(false);
 	const [time, setTime] = useState<number>(0);
-
-	const formatTime = (time: number): string => {
-		const hours = Math.floor(time / 3600);
-		const minutes = Math.floor((time % 3600) / 60);
-		const seconds = time % 60;
-
-		return `${hours < 10 ? "0" + hours : hours}:${
-			minutes < 10 ? "0" + minutes : minutes
-		}:${seconds < 10 ? "0" + seconds : seconds}`;
-	};
 
 	useEffect(() => {
 		let intervalId: NodeJS.Timeout;
