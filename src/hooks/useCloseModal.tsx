@@ -6,7 +6,11 @@ export const useCloseModal = () => {
 	const setAuthModal = useSetRecoilState(authModalState);
 
 	const closeModal = () => {
-		setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
+		setAuthModal((prevState) => ({
+			...prevState,
+			isOpen: false,
+			type: "login",
+		}));
 	};
 
 	useEffect(() => {
