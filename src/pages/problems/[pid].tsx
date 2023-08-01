@@ -53,3 +53,5 @@ export async function getStaticProps({ params }: { params: { pid: string } }) {
 		},
 	};
 }
+
+
