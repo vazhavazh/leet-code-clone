@@ -3,7 +3,6 @@ import Split from "react-split";
 import ProblemDescription from "./ProblemDescription/ProblemDescription";
 import PlayGround from "./PlayGround/PlayGround";
 import { Problem } from "@/utils/types/problem";
-import { problems } from "../../mockProblems/problems";
 type WorkspaceProps = {
 	problem: Problem;
 };

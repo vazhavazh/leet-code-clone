@@ -6,7 +6,7 @@ import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditorFooter";
 import { Problem } from "@/utils/types/problem";
-import {useState} from 'react';
+import { useState } from "react";
 
 type PlayGroundProps = {
 	problem: Problem;
@@ -50,15 +50,17 @@ const PlayGround: React.FC<PlayGroundProps> = ({ problem }) => {
 					<div className='flex'>
 						{problem.examples.map((example, index) => (
 							<div
-							onClick={()=> setActiveTestCaseId(index)}
-								className='mr-2 items-start mt-2 text-white'
+								onClick={() => setActiveTestCaseId(index)}
+								className='mr-2 items-start mt-2  text-gray-500'
 								key={example.id}>
 								<div className='flex flex-wrap items-center gap-y-4'>
 									<div
-										className='font-medium items-center 
+										className={`font-medium items-center 
 								transition-all focus-within:outline-none inline-flex bg-dark-fill-3
 								hover:bg-dark-fill-2 relative rounded-lg px-4 py-1 cursor-pointer
-								whitespace-nowrap'>
+								whitespace-nowrap
+								${activeTestCaseId === index ? "text-white" : ""}
+								`}>
 										Case {index + 1}
 									</div>
 								</div>
@@ -75,7 +77,7 @@ const PlayGround: React.FC<PlayGroundProps> = ({ problem }) => {
 						<div
 							className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 
 							border-transparent text-white mt-2'>
-							[0,1]
+							{problem.examples[activeTestCaseId].outPutText}
 						</div>
 					</div>
 				</div>
