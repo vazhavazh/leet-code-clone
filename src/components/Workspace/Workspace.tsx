@@ -3,6 +3,7 @@ import Split from "react-split";
 import ProblemDescription from "./ProblemDescription/ProblemDescription";
 import PlayGround from "./PlayGround/PlayGround";
 import { Problem } from "@/utils/types/problem";
+import { problems } from "../../mockProblems/problems";
 type WorkspaceProps = {
 	problem: Problem;
 };
@@ -13,7 +14,10 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
 			className='split'
 			minSize={0}>
 			<ProblemDescription problem={problem} />
-			<PlayGround />
+			<div className="bg-dark-fill-2">
+				{" "}
+				<PlayGround problem={problem} />
+			</div>
 		</Split>
 	);
 };
