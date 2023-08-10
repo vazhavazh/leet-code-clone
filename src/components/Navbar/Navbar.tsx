@@ -17,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 				href='./'
 				className='flex items-center justify-center h-20'>
 				<Image
-					src='./logo.png'
+					src='/logo.png'
 					alt='Leet-clone'
 					width={200}
 					height={200}

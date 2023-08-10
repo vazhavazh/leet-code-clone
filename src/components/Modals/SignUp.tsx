@@ -67,10 +67,9 @@ const SignUp: React.FC<SignUpProps> = () => {
 		} catch (error: any) {
 			toast.error(error.message, {
 				position: "top-center",
-				
 			});
 		} finally {
-
+			toast.dismiss("loadingToast");
 		}
 	};
 

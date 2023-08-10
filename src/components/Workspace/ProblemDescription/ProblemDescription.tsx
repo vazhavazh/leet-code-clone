@@ -2,6 +2,7 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 import { TiStarOutline } from "react-icons/ti";
 import { Problem } from "@/utils/types/problem";
+import Image from "next/image";
 
 type ProblemDescriptionProps = {
 	problem: Problem;
@@ -74,7 +75,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 										Example {index + 1}:
 									</p>
 									{example.img && (
-										<img
+										<Image
 											src={example.img}
 											alt='example image'
 											className='mt-3'
