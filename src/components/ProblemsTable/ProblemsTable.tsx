@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { problems } from "@/mockProblems/problems";
 import { BsCheckCircle } from "react-icons/bs";
 import Link from "next/link";
 import { AiFillYoutube } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import YouTube from "react-youtube";
+import { useGetProblems } from "@/hooks/useGetProblems";
 
-type ProblemsTableProps = {};
+type ProblemsTableProps = {
+	setLoadingProblems: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const ProblemsTable: React.FC<ProblemsTableProps> = () => {
+const ProblemsTable: React.FC<ProblemsTableProps> = ({
+	setLoadingProblems,
+}) => {
 	const [youtubePlayer, setYoutubePlayer] = useState({
 		isOpen: false,
 		videoId: "",
 	});
+
+	const problems = useGetProblems(setLoadingProblems);
+
 	const closeModal = () => {
 		setYoutubePlayer({
 			isOpen: false,
@@ -51,11 +58,20 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 								/>
 							</th>
 							<td className='px-6 py-4'>
-								<Link
-									className='hover:text-blue-600 cursor-pointer'
-									href={`/problems/${el.id}`}>
-									{el.title}
-								</Link>
+								{el.link ? (
+									<Link
+										href={el.link}
+										className='hover:text-blue-600 cursor-pointer'
+										target='_blank'>
+										{el.title}
+									</Link>
+								) : (
+									<Link
+										className='hover:text-blue-600 cursor-pointer'
+										href={`/problems/${el.id}`}>
+										{el.title}
+									</Link>
+								)}
 							</td>
 							<td className={`px-6 py-4 ${difficultyColor}`}>
 								{el.difficulty}
@@ -108,3 +124,5 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 	);
 };
 export default ProblemsTable;
+
+
