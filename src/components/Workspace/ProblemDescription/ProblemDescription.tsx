@@ -6,6 +6,10 @@ import Image from "next/image";
 import RectangleSkeleton from "@/components/Skeletons/RectangleSkeleton";
 import CircleSkeleton from "@/components/Skeletons/CircleSkeleton";
 import { useGetSingleProblem } from "@/hooks/useGetSingleProblem";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, fireStore } from "@/firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 type ProblemDescriptionProps = {
 	problem: Problem;
@@ -14,6 +18,10 @@ type ProblemDescriptionProps = {
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 	const { currentProblem, loading, problemDifficultyClass } =
 		useGetSingleProblem(problem.id);
+	const { liked, disliked, solved, starred, setData } =
+		useGetUserDataAboutProblem(problem.id);
+
+		
 	return (
 		<div className='bg-dark-layer-1'>
 			{/* TAB */}
@@ -135,3 +143,38 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 };
 export default ProblemDescription;
 
+function useGetUserDataAboutProblem(problemId: string) {
+	const [data, setData] = useState({
+		liked: false,
+		disliked: false,
+		starred: false,
+		solved: false,
+	});
+	const [user] = useAuthState(auth);
+
+	useEffect(() => {
+		const getUserData = async () => {
+			const userRef = doc(fireStore, "users", user!.uid);
+			const userSnap = await getDoc(userRef);
+			if (userSnap.exists()) {
+				const data = userSnap.data();
+				const {
+					solvedProblems,
+					likedProblems,
+					starredProblems,
+					dislikedProblems,
+				} = data;
+				setData({
+					liked: likedProblems.includes(problemId),
+					disliked: dislikedProblems.includes(problemId),
+					starred: starredProblems.includes(problemId),
+					solved: solvedProblems.includes(problemId),
+				});
+			}
+		};
+		if (user) getUserData();
+		return () =>
+			setData({ liked: false, disliked: false, starred: false, solved: false });
+	}, [problemId, user]);
+	return { ...data, setData };
+}
