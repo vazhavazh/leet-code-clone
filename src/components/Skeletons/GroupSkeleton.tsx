@@ -1,8 +1,7 @@
 import React from "react";
 
-type LoadingSkeletonProps = {};
 
-const LoadingSkeleton: React.FC<LoadingSkeletonProps> = () => {
+const GroupSkeleton: React.FC = () => {
 	return (
 		<div className='flex items-center space-x-12 mt-4 px-6'>
 			<div className='w-6 h-6 shrink-0 rounded-full bg-dark-layer-1'></div>
@@ -13,4 +12,4 @@ const LoadingSkeleton: React.FC<LoadingSkeletonProps> = () => {
 		</div>
 	);
 };
-export default LoadingSkeleton;
+export default GroupSkeleton;

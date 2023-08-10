@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/LoadingSkeleton/LoadingSkeleton";
+import GroupSkeleton from "@/components/Skeletons/GroupSkeleton";
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
 import Topbar from "@/components/Topbar/Topbar";
 import { useState } from "react";
@@ -18,7 +18,7 @@ export default function Home() {
 					{loadingProblems && (
 						<div className='animate-pulse max-w-[1200px] mx-auto sm:w-7/12 w-full'>
 							{[...Array(10)].map((_, idx) => (
-								<LoadingSkeleton key={idx} />
+								<GroupSkeleton key={idx} />
 							))}
 						</div>
 					)}
