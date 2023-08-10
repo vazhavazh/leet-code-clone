@@ -3,7 +3,6 @@ import { DBProblem } from "@/utils/types/problem";
 import { doc, getDoc } from "firebase/firestore";
 import { fireStore } from "@/firebase/firebase";
 
-
 export const useGetSingleProblem = (problemId: string) => {
 	const [currentProblem, setCurrentProblem] = useState<DBProblem | null>(null);
 	const [loading, setLoading] = useState(true);
