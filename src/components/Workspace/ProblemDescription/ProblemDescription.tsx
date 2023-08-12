@@ -2,6 +2,7 @@ import {
 	AiFillLike,
 	AiFillDislike,
 	AiOutlineLoading3Quarters,
+	AiFillStar,
 } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 import { TiStarOutline } from "react-icons/ti";
@@ -243,11 +244,13 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                                 px-2.5 py-1 text-xs font-medium capitalize `}>
 									{currentProblem.difficulty}
 								</div>
-								<div
-									className='rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s 
+								{solved && (
+									<div
+										className='rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s 
                             text-dark-green-s'>
-									<BsCheck2Circle />
-								</div>
+										<BsCheck2Circle />
+									</div>
+								)}
 								<div
 									className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded 
                             p-[3px]  ml-4 text-lg transition-colors duration-200 text-dark-gray-6'
@@ -280,7 +283,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 									className='cursor-pointer hover:bg-dark-fill-3  rounded p-[3px]  ml-4 text-xl 
                             transition-colors duration-200 text-green-s text-dark-gray-6 '>
 									{starred && !updating && (
-										<TiStarOutline className='text-dark-yellow' />
+										<AiFillStar className='text-dark-yellow' />
 									)}
 									{!starred && !updating && <TiStarOutline />}
 									{updating && (
@@ -318,7 +321,6 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 											<Image
 												src={example.img}
 												alt='example image'
-												layout='responsive'
 												width={542}
 												height={232}
 											/>
@@ -332,7 +334,6 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 											{example.explanation && (
 												<>
 													<strong>Explanation:</strong> {example.explanation}
-													== 9, we return [0, 1].
 												</>
 											)}
 										</pre>
