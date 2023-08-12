@@ -29,5 +29,5 @@ export const useGetSingleProblem = (problemId: string) => {
 		getProblemFromDB();
 	}, [problemId]);
 
-	return { currentProblem, loading, problemDifficultyClass };
+	return { currentProblem, loading, problemDifficultyClass, setCurrentProblem };
 };
