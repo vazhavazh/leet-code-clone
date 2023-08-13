@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PreferenceNavBar from "./PreferenceNavBar/PreferenceNavBar";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
@@ -6,7 +6,6 @@ import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditorFooter";
 import { Problem } from "@/utils/types/problem";
-import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, fireStore } from "@/firebase/firebase";
 import { toast } from "react-toastify";
@@ -20,13 +19,23 @@ type PlayGroundProps = {
 	setSolved: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+export interface ISettings {
+	fontSize: string;
+	settingsModalIsOpen: boolean;
+	dropdownIsOpen: boolean;
+}
+
 const PlayGround: React.FC<PlayGroundProps> = ({
 	problem,
 	setSuccess,
 	setSolved,
 }) => {
 	const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
-
+	const [settings, setSettings] = useState<ISettings>({
+		fontSize: "16px",
+		settingsModalIsOpen: false,
+		dropdownIsOpen: false,
+	});
 	let [userCode, setUserCode] = useState<string>(problem.starterCode);
 	const [user] = useAuthState(auth);
 
@@ -106,7 +115,10 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 
 	return (
 		<div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
-			<PreferenceNavBar />
+			<PreferenceNavBar
+				settings={settings}
+				setSettings={setSettings}
+			/>
 
 			<Split
 				className='h-[calc(100vh-94px)]'
@@ -119,7 +131,7 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 						value={userCode}
 						theme={vscodeDark}
 						extensions={[javascript()]}
-						style={{ fontSize: 16 }}
+						style={{ fontSize: settings.fontSize }}
 					/>
 				</div>
 				<div className='w-full px-5 overflow-auto'>
