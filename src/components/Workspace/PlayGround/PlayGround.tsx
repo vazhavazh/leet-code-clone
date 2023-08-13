@@ -6,7 +6,7 @@ import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
 import EditorFooter from "./EditorFooter";
 import { Problem } from "@/utils/types/problem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, fireStore } from "@/firebase/firebase";
 import { toast } from "react-toastify";
@@ -27,7 +27,7 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 }) => {
 	const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
 
-	const [userCode, setUserCode] = useState<string>(problem.starterCode);
+	let [userCode, setUserCode] = useState<string>(problem.starterCode);
 	const [user] = useAuthState(auth);
 
 	const {
@@ -44,25 +44,30 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 			return;
 		}
 		try {
+			userCode = userCode.slice(userCode.indexOf(problem.starterFunctionName));
 			const cb = new Function(`return ${userCode}`)();
-			const success = problems[pid as string].handlerFunction(cb);
+			const handler = problems[pid as string].handlerFunction;
 
-			if (success) {
-				toast.success("Congrats! All tests passed!", {
-					position: "top-center",
-					autoClose: 3000,
-					theme: "dark",
-				});
-				setSuccess(true);
-				setTimeout(() => {
-					setSuccess(false);
-				}, 4000);
+			if (typeof handler === "function") {
+				const success = handler(cb);
 
-				const userRef = doc(fireStore, "users", user.uid);
-				await updateDoc(userRef, {
-					solvedProblems: arrayUnion(pid),
-				});
-				setSolved(true);
+				if (success) {
+					toast.success("Congrats! All tests passed!", {
+						position: "top-center",
+						autoClose: 3000,
+						theme: "dark",
+					});
+					setSuccess(true);
+					setTimeout(() => {
+						setSuccess(false);
+					}, 4000);
+
+					const userRef = doc(fireStore, "users", user.uid);
+					await updateDoc(userRef, {
+						solvedProblems: arrayUnion(pid),
+					});
+					setSolved(true);
+				}
 			}
 		} catch (error: any) {
 			if (
@@ -85,9 +90,20 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 		}
 	};
 
+	useEffect(() => {
+		const code = localStorage.getItem(`code-${pid}`);
+		if (user) {
+			setUserCode(code ? JSON.parse(code) : problem.starterCode);
+		} else {
+			setUserCode(problem.starterCode);
+		}
+	}, [pid, user, problem.starterCode]);
+
 	const onChange = (value: string) => {
 		setUserCode(value);
+		localStorage.setItem(`code-${pid}`, JSON.stringify(value));
 	};
+
 	return (
 		<div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
 			<PreferenceNavBar />
@@ -100,7 +116,7 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 				<div className='w-full overflow-auto'>
 					<CodeMirror
 						onChange={onChange}
-						value={problem.starterCode}
+						value={userCode}
 						theme={vscodeDark}
 						extensions={[javascript()]}
 						style={{ fontSize: 16 }}
