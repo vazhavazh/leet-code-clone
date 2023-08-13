@@ -21,7 +21,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 	settings,
 	setSettings,
 }) => {
-	const [fontSize, setFontSize] = useLocalStorage("lc-font-size", "16px");
+	const [fontSize, setFontSize] = useLocalStorage("lc-font-size", "14px");
 	const handleClickDropDown = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
@@ -72,7 +72,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 											onClick={handleClickDropDown}
 											className='flex cursor-pointer items-center rounded px-3 py-1.5 text-left focus:outline-none whitespace-nowrap bg bg-dark-fill-3 hover:bg-dark-fill-2 active:bg-dark-fill-3 w-full justify-between'
 											type='button'>
-											14px
+											{fontSize}
 											<BsChevronDown />
 										</button>
 										{/* Show dropdown for fontsizes */}
@@ -87,7 +87,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
 													<SettingsListItem
 														key={idx}
 														fontSize={fontSize}
-														selectedOption={"14px"}
+														selectedOption={settings.fontSize}
 														handleFontSizeChange={(fontSize) => {
 															setFontSize(fontSize);
 															setSettings({ ...settings, fontSize: fontSize });

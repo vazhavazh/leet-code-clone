@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { problems } from "@/utils/problems";
 import { useRouter } from "next/router";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type PlayGroundProps = {
 	problem: Problem;
@@ -30,14 +31,15 @@ const PlayGround: React.FC<PlayGroundProps> = ({
 	setSuccess,
 	setSolved,
 }) => {
+	let [userCode, setUserCode] = useState<string>(problem.starterCode);
+	const [user] = useAuthState(auth);
 	const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+	const [fontSize, setFontSize] = useLocalStorage("lc-font-size", "14px");
 	const [settings, setSettings] = useState<ISettings>({
-		fontSize: "16px",
+		fontSize: fontSize,
 		settingsModalIsOpen: false,
 		dropdownIsOpen: false,
 	});
-	let [userCode, setUserCode] = useState<string>(problem.starterCode);
-	const [user] = useAuthState(auth);
 
 	const {
 		query: { pid },
