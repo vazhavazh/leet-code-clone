@@ -26,9 +26,13 @@ import { useGetUserDataAboutProblem } from "@/hooks/useGetUserDataAboutProblem";
 
 type ProblemDescriptionProps = {
 	problem: Problem;
+	_solved: boolean;
 };
 
-const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
+const ProblemDescription: React.FC<ProblemDescriptionProps> = ({
+	problem,
+	_solved,
+}) => {
 	const [user] = useAuthState(auth);
 
 	const { currentProblem, loading, problemDifficultyClass, setCurrentProblem } =
@@ -244,7 +248,8 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                                 px-2.5 py-1 text-xs font-medium capitalize `}>
 									{currentProblem.difficulty}
 								</div>
-								{solved && (
+
+								{(solved || _solved) && (
 									<div
 										className='rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s 
                             text-dark-green-s'>
