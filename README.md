@@ -1,10 +1,14 @@
 
-# leet-code-p 
+# <a href="https://leet-code-p.vercel.app/">leet-code-p</a> 🔗
 ![Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSdwdLpZzehcdyRIBHp-K4oZwOvFAwBnDZkDpjsrHlvg&s)
 
 leet-code-p is  programming platform that draws inspiration from LeetCode, offering users a seamless and enriching coding experience for solving complex algorithmic problems. The project harmoniously integrates a user-friendly frontend and a robust backend, meticulously crafted using a stack of cutting-edge technologies.
 
+## Screenshots
 
+![App Screenshot](https://raw.githubusercontent.com/vazhavazh/leet-code-p/main/Monosnap%20Leet%20Code.png)
+![App Screenshot](https://raw.githubusercontent.com/vazhavazh/leet-code-p/main/auth.png)
+![App Screenshot](https://raw.githubusercontent.com/vazhavazh/leet-code-p/main/congrat.png)
 
 
 ## Features
@@ -17,7 +21,7 @@ leet-code-p is  programming platform that draws inspiration from LeetCode, offer
 
 
     
-## Tech Stack
+## 🛠 Tech Stack
 
 <p align="left">
   
