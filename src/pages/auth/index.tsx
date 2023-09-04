@@ -24,8 +24,8 @@ const AuthPage: React.FC<indexProps> = () => {
 	if (pageLoading) return null;
 
 	return (
-		<div className='bg-gradient-to-b from-gray-600 to-black h-screen relative'>
-			<div className='max-w-7xl mx-auto'>
+		<div className='relative h-screen bg-gradient-to-b from-gray-600 to-black'>
+			<div className='mx-auto max-w-7xl'>
 				<Navbar />
 				<div
 					className='flex items-center justify-center 
